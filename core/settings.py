@@ -140,7 +140,8 @@ REST_FRAMEWORK = {
 }
 
 CORS_ALLOWED_ORIGINS = [
-  'http://localhost:3000'
+  'http://localhost:3000',
+  'http://192.168.0.15:3000'
 ]
 
 AUTH_USER_MODEL = "users.NewUser"
