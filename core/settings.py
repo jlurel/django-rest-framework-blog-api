@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'users',
     'blog',
     'blog_api',
+    'django_filters',
     'rest_framework_simplejwt.token_blacklist',
 ]
 
@@ -135,7 +136,12 @@ REST_FRAMEWORK = {
     'rest_framework.permissions.AllowAny',
   ],
   'DEFAULT_AUTHENTICATION_CLASSES': [
-    'rest_framework_simplejwt.authentication.JWTAuthentication',
+    'rest_framework_simplejwt.authentication.JWTAuthentication',  
+  ],
+  'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+  'DEFAULT_FILTER_BACKENDS': [
+    'django_filters.rest_framework.DjangoFilterBackend',
+    'rest_framework.filters.SearchFilter'
   ]
 }
 
@@ -160,5 +166,3 @@ SIMPLE_JWT = {
   'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
   'TOKEN_TYPE_CLAIM': 'token_type',
 }
-
-REST_FRAMEWORK = { 'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema' }
