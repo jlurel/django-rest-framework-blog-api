@@ -1,9 +1,13 @@
 from django.urls import path
-from .views import BlacklistTokenView, CustomUserCreate
+from .views import BlacklistTokenView, CustomUserCreate, UserAPIView
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 app_name = 'users'
 
 urlpatterns = [
-    path('register/', CustomUserCreate.as_view(), name='create_user'),
-    path('logout/blacklist/', BlacklistTokenView.as_view(), name='blacklist')
+    path('', UserAPIView.as_view(), name='auth_get_profile'),
+    path('login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('login/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('register/', CustomUserCreate.as_view(), name='auth_register'),
+    path('logout/', BlacklistTokenView.as_view(), name='auth_logout')
 ]

@@ -21,3 +21,11 @@ class RegisterUserSerializer(serializers.ModelSerializer):
     instance.save()
 
     return instance
+
+class UserSerializer(serializers.ModelSerializer):
+  username = serializers.CharField(source='user_name')
+  firstname = serializers.CharField(source='first_name')
+
+  class Meta:
+    model = NewUser
+    fields = ('email', 'username', 'firstname', 'about')

@@ -39,18 +39,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
     'users',
     'blog',
     'blog_api',
     'django_filters',
-    'rest_framework_simplejwt.token_blacklist',
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -133,11 +133,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
   'DEFAULT_PERMISSION_CLASSES': [
-    'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.AllowAny',
   ],
-  'DEFAULT_AUTHENTICATION_CLASSES': [
-    'rest_framework_simplejwt.authentication.JWTAuthentication',  
-  ],
+  'DEFAULT_AUTHENTICATION_CLASSES': (
+      'rest_framework_simplejwt.authentication.JWTAuthentication',
+  ),
   'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
   'DEFAULT_FILTER_BACKENDS': [
     'django_filters.rest_framework.DjangoFilterBackend',
@@ -153,7 +153,7 @@ CORS_ALLOWED_ORIGINS = [
 AUTH_USER_MODEL = "users.NewUser"
 
 SIMPLE_JWT = {
-  'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1),
+  'ACCESS_TOKEN_LIFETIME': timedelta(minutes=90),
   'REFRESH_TOKEN_LIFETIME': timedelta(days=10),
   'ROTATE_REFRESH_TOKENS': True,
   'BLACKLIST_AFTER_ROTATION': True,

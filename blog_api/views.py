@@ -1,9 +1,9 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import generics, filters, viewsets
 from rest_framework.response import Response
-from rest_framework.permissions import SAFE_METHODS, BasePermission, IsAuthenticatedOrReadOnly
-from blog.models import Post
-from .serializers import PostSerializer
+from rest_framework.permissions import SAFE_METHODS, BasePermission
+from blog.models import Category, Post
+from .serializers import CategorySerializer, PostSerializer
 
 class PostUserWritePermission(BasePermission):
   message = "Editing posts is restricted to the author only."
@@ -26,3 +26,7 @@ class PostList(viewsets.ModelViewSet):
 
   def get_queryset(self):
     return Post.postobjects.all()
+
+class CategoryList(viewsets.ModelViewSet):
+  serializer_class = CategorySerializer
+  queryset = Category.objects.all()
