@@ -7,7 +7,7 @@ class PostSerializer(ModelSerializer):
 
   class Meta:
     model = Post
-    fields = ['id', 'title', 'author', 'category', 'excerpt', 'content', 'status', 'slug']
+    fields = ['id', 'title', 'author', 'category', 'image', 'excerpt', 'content', 'status', 'slug']
 
   def to_representation(self, instance):
     rep = super().to_representation(instance)
@@ -18,4 +18,4 @@ class PostSerializer(ModelSerializer):
 class CategorySerializer(ModelSerializer):
   class Meta:
     model = Category
-    fields = ['name']
+    fields = ['id', 'name']
